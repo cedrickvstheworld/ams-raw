@@ -1,0 +1,98 @@
+<?php
+include "create-user.php";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $last_name = validate($_POST['last_name']);
+    $first_name = validate($_POST['first_name']);
+    $mid_name = validate($_POST['mid_name']);
+    $contact = validate($_POST['contact']);
+    $occupation = validate($_POST['occupation']);
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
+    $user_name = validate($_POST['user_name']);
+    $email = validate($_POST['email']);
+    $password = validate($_POST['password']);
+
+    // Insert data into the database
+    $sql = "INSERT INTO `user` (`id`,`last_name`, `first_name`, `mid_name`, `contact`, `occupation`, `gender`, `user_name`, `email`, `password`) VALUES ('NULL','$last_name','$first_name','$mid_name','$contact','$occupation','$gender','$user_name','$email','$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+function validate($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+      <form method="post">
+        <h1> Register New Tenant</h1><br>
+        
+        <fieldset>
+          <label for="last" class="required"><span></span>Last name:</label>
+          <input type="text" id="last_name" name="last_name" placeholder="Last name:" required>
+        
+          <label for="first" class="required">First name:</label>
+          <input type="text" id="first_name" name="first_name" placeholder="First name:" required>
+
+          <label for="middle">Middle name:</label>
+          <input type="text" id="mid_name" name="mid_name" placeholder="Middle name (Optional)">
+
+          <label for="gender" class="required">Gender:</label>
+          <div class="gender-selection" required>
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label>
+          </div>
+          <br>
+
+          <label for="Contact" class="required">Contact Number:</label>
+          <input type="tel" name="contact" id="cnum" placeholder="+63" maxLegnth="11" required>
+
+          <label for="region" class="required">Occupation:</label>
+          <input type="text" id="region" name="occupation"  required>
+
+          <label for="barangay" class="required">User Name:</label>
+          <input type="text" id="user_name" name="user_name" required>
+
+          <label for="email" class="required">Email:</label>
+          <input type="text" id="email" name="email"  required>
+
+          <label for="password" class="required">Password:</label>
+          <input class="form-inputs" type="password"  id="pwd"  name="password" required>
+          <span>
+            
+          </span>
+          
+        </fieldset>
+        <button type="submit" id="sign" name="sign">Sign-up</button>
+      </form>
+    </div>
+  </div>

@@ -1,0 +1,12 @@
+									<h1><?php echo $_SESSION['user_name']; ?></h1>
+									<p><?php echo $_SESSION['email']; ?></p>
+    								<a href="log-out.php" class="logout-link">Logout</a>
+									<div
+										class="modal fade"
+										id="modal"
+										tabindex="-1"
+										role="dialog"
+										aria-labelledby="modalLabel"
+										aria-hidden="true"
+									>
+									</div>
